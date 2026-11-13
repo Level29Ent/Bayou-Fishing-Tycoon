@@ -53,12 +53,12 @@
       </div>
       <div class="compass" aria-label="Boat coordinates">
         <span>N</span>
-        <div class="compass-line">W ─── ◆ ─── E</div>
+        <div class="compass-line">W ─── + ─── E</div>
         <small id="coordinates">40 m upstream</small>
       </div>
       <div class="navigation">
         <button id="openMap" title="Open region map">
-          ⌖ <span>Region map</span></button
+          + <span>Region map</span></button
         ><button
           id="sound"
           aria-pressed="false"
@@ -93,7 +93,7 @@
         </div>
         <div class="action-row">
           <button class="cast-button" id="cast">
-            Cast your line <span>↗</span></button
+            Cast your line <span>→</span></button
           ><button
             class="bait-button"
             id="openBait"
@@ -120,17 +120,17 @@
       </div>
       <nav class="dockbar" aria-label="Game menu">
         <button data-panel="inventory">
-          <span class="nav-icon">♧</span> Livewell
+          <span class="nav-icon">01</span> Livewell
           <b id="bucketCount">0</b></button
         ><button data-panel="journal">
-          <span class="nav-icon">▤</span> Fish journal</button
+          <span class="nav-icon">02</span> Fish journal</button
         ><button data-panel="shop">
-          <span class="nav-icon">⚒</span> Outfitter</button
+          <span class="nav-icon">03</span> Outfitter</button
         ><button data-panel="contracts">
-          <span class="nav-icon">◇</span> Contracts
+          <span class="nav-icon">04</span> Contracts
           <i id="contractDot" hidden></i></button
         ><button data-panel="map">
-          <span class="nav-icon">⌖</span> Travel
+          <span class="nav-icon">05</span> Travel
         </button>
       </nav>
       <div class="bottom-caption">
