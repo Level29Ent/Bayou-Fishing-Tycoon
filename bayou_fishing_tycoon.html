@@ -1,107 +1,208 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Level 29 — Bayou Fishing Tycoon</title>
-<link rel="stylesheet" href="region.css">
-<style>
-:root{--ink:#f4f0dd;--muted:#b8c6b2;--panel:#122a29;--panel2:#1a3934;--lime:#c5f36a;--gold:#ffd166;--water:#0c5b62;--deep:#082d37;--purple:#9d70e8}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0%,#24574c 0,#102e2e 42%,#081b24 100%);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
-header{display:flex;align-items:center;justify-content:space-between;padding:14px 4vw;border-bottom:1px solid #ffffff20;background:#071b20cc;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
-.brand{font-weight:950;letter-spacing:.06em}.brand span{color:var(--lime)}.sub{font-size:10px;letter-spacing:.2em;color:#a6c4b4}
-.stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.stat{background:#173b38;border:1px solid #ffffff20;padding:7px 11px;border-radius:12px;font-size:13px;font-weight:800}
-main{max-width:1120px;margin:auto;padding:22px 18px 50px}.hero{display:grid;grid-template-columns:1.35fr .9fr;gap:18px;align-items:stretch}
-.scene{min-height:330px;border-radius:22px;overflow:hidden;position:relative;border:1px solid #ffffff30;background:linear-gradient(180deg,#7ab7a3 0%,#397c70 32%,#14515a 33%,#082d37 100%)}
-.moon{position:absolute;right:12%;top:10%;width:68px;height:68px;background:#ffe7a1;border-radius:50%;box-shadow:0 0 45px #ffe7a180}
-.tree{position:absolute;top:0;height:48%;width:16px;background:#142b27;border-radius:20px;transform-origin:top}.tree:after{content:"";position:absolute;top:0;left:-75px;width:165px;height:90px;background:#163c30;clip-path:polygon(50% 0,100% 100%,0 100%)}.t1{left:12%;transform:rotate(7deg)}.t2{right:18%;transform:rotate(-9deg);height:58%}
-.water{position:absolute;left:0;right:0;bottom:0;height:57%;background:repeating-linear-gradient(174deg,#0e5960 0 18px,#0c4c55 19px 22px,#12636a 23px 28px)}
-.dock{position:absolute;bottom:18%;left:7%;width:36%;height:18px;background:#93613a;transform:rotate(-5deg);box-shadow:0 10px 0 #583b2c}
-.boat{position:absolute;bottom:34%;left:57%;font-size:58px;filter:drop-shadow(0 9px 5px #001a1c)}
-.fishArt{position:absolute;bottom:11%;left:35%;font-size:38px;animation:swim 4s ease-in-out infinite}@keyframes swim{50%{transform:translate(90px,-12px) scaleX(-1)}}
-.sceneTitle{position:absolute;left:22px;top:18px;text-shadow:0 2px 10px #002;}.sceneTitle small{display:block;color:#d4f1d9;letter-spacing:.2em;font-weight:800;font-size:10px}.sceneTitle strong{font-size:clamp(24px,4vw,42px);line-height:1.05}
-.fishingPanel,.panel{background:linear-gradient(145deg,#1b403a,#102a2b);border:1px solid #ffffff24;border-radius:22px;padding:18px;box-shadow:0 14px 35px #0003}
-.fishingPanel h2{margin:0 0 6px}.muted{color:var(--muted);font-size:13px}.bigButton{border:0;background:linear-gradient(135deg,#d4fa75,#92d94b);color:#14251c;font-weight:950;font-size:17px;padding:16px 20px;border-radius:14px;width:100%;margin:15px 0 9px;cursor:pointer;box-shadow:0 5px 0 #558b39}.bigButton:active{transform:translateY(3px);box-shadow:0 2px 0 #558b39}.bigButton:disabled{opacity:.55;cursor:wait}
-.progress{height:9px;background:#071d21;border-radius:20px;overflow:hidden;margin:12px 0}.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8fe2a4,#ffe07a);transition:width .12s}
-.tabs{display:flex;gap:8px;margin:20px 0 12px;flex-wrap:wrap}.tab{border:1px solid #ffffff24;background:#173633;color:var(--ink);border-radius:999px;padding:9px 14px;font-weight:800;cursor:pointer}.tab.active{background:var(--lime);color:#14251c}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.item{background:#153531;border:1px solid #ffffff20;border-radius:16px;padding:14px;min-height:145px}.item .emoji{font-size:30px}.item h3{font-size:15px;margin:5px 0}.item p{font-size:12px;color:var(--muted);min-height:32px;margin:4px 0 10px}.item button,.smallBtn{border:1px solid #ffffff28;background:#294d43;color:#fff;border-radius:10px;padding:8px 10px;font-weight:850;cursor:pointer}.item button:disabled{opacity:.4;cursor:not-allowed}
-.bottom{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.log{background:#0b2428;border-radius:14px;padding:12px;font-size:12px;color:#c8d9cc;min-height:88px}.fishrow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #ffffff17;font-size:13px}
-footer{text-align:center;color:#92a99b;font-size:10px;letter-spacing:.15em;padding:26px}
-.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#f7e7b0;color:#182b24;padding:12px 18px;border-radius:14px;font-weight:900;box-shadow:0 8px 25px #0008;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10}.toast.show{opacity:1}
-@media(max-width:760px){header{align-items:flex-start;gap:8px;flex-direction:column}.stats{justify-content:flex-start}.hero{grid-template-columns:1fr}.scene{min-height:260px}.grid{grid-template-columns:repeat(2,1fr)}.bottom{grid-template-columns:1fr}}
-@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.item{padding:10px}.stat{font-size:12px}}
-</style>
-</head>
-<body>
-<header><div><div class="brand">LEVEL 29 <span>ENTERTAINMENT</span></div><div class="sub">PRESENTS · BAYOU FISHING TYCOON</div></div><div class="stats"><div class="stat">💵 $<b id="cash">150</b></div><div class="stat">🐟 <b id="caught">0</b> caught</div><div class="stat">⭐ Lv. <b id="level">1</b></div></div></header>
-<main>
-<section class="region" aria-labelledby="regionTitle">
-<div class="region-heading"><div><div class="sub">REGIONAL CHART · 24 × 18 KM</div><h1 id="regionTitle">Three cities. One fishing empire.</h1><p class="muted">Explore full-sized city districts, follow the river to new markets and supply the coast. Fictional Louisiana-inspired region, drawn to a consistent metre scale.</p></div></div>
-<div class="region-layout"><div class="chart-wrap"><canvas id="regionMap" tabindex="0" aria-label="Regional city map. Drag or use arrow keys to pan. Plus and minus zoom; zero resets. Choose a port using the adjacent selector.">Use the port selector to explore Cypress City, Belle Rive and Port Soleil.</canvas><div class="chart-toolbar"><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomOut" aria-label="Zoom out">−</button><button id="resetMap">Region view</button></div><div class="chart-help">Drag to explore · Tap a city to inspect · + / − to zoom · Gold = ports, lime = your boat</div></div>
-<aside class="port-panel"><label class="sub" for="citySelect">EXPLORE A CITY</label><select id="citySelect"><option value="cypress">Cypress City</option><option value="belle">Belle Rive</option><option value="gulf">Port Soleil</option></select><h2 id="portName"></h2><p class="muted" id="portDescription"></p><div class="port-facts"><div>City footprint<b id="cityArea"></b></div><div>Market price<b id="marketRate"></b></div><div>Direct distance<b id="routeDistance"></b></div><div>Passage fare<b id="passageFare"></b></div></div><div id="districtList" class="city-districts"></div><button class="bigButton" id="sail">Sail to port</button><p class="muted">Passage is instant and costs $4/km, rounded up. Each port has free public fishing. Zoom in to see 220 m street blocks, buildings, parks and docks.</p></aside></div>
-<div class="port-location" aria-live="polite"><b id="dockedAt"></b><span id="localMarket"></span></div>
-</section>
-
-<section class="hero">
-<div class="scene"><div class="moon"></div><div class="tree t1"></div><div class="tree t2"></div><div class="water"></div><div class="dock"></div><div class="boat">🛶</div><div class="fishArt">🐟</div><div class="sceneTitle"><small>LOUISIANA • EST. 2026</small><strong>Make your<br>fortune on the water.</strong></div></div>
-<div class="fishingPanel"><div class="sub">YOUR CURRENT FISHING WATER</div><h2 id="spotName">Cypress Landing</h2><div class="muted">Cast your line, reel in fish, sell your catch, and build a bayou empire.</div><button class="bigButton" id="cast">🎣 CAST YOUR LINE</button><div class="progress"><i id="bar"></i></div><div class="muted" id="status" aria-live="polite">Ready when you are. Watch the water...</div><div style="display:flex;gap:8px;margin-top:12px"><button class="smallBtn" id="sellAll">Sell all fish</button><button class="smallBtn" id="daily">Daily bonus +$100</button></div></div>
-</section>
-<div class="tabs"><button class="tab active" data-tab="shop">🧰 Upgrades</button><button class="tab" data-tab="inventory">🎒 Fish market</button><button class="tab" data-tab="business">🏝️ Tycoon</button><button class="tab" data-tab="map">🗺️ Fishing waters</button><button class="tab" data-tab="contracts">📦 Deliveries</button></div>
-<section id="content"></section>
-<div class="bottom"><div class="panel"><b>📜 Bayou journal</b><div class="muted" style="margin:5px 0 10px">Your latest catches and business updates.</div><div class="log" id="log">Welcome to Cypress Landing. Your fishing empire starts with one cast.</div></div><div class="panel"><b>📈 Your operation</b><div class="fishrow"><span>Rod power</span><b id="rodStat">1</b></div><div class="fishrow"><span>Boat speed</span><b id="boatStat">1</b></div><div class="fishrow"><span>Fish value</span><b id="valueStat">1×</b></div><div class="fishrow"><span>Passive income</span><b id="incomeStat">$0/min</b></div></div></div>
-</main><footer>AN ORIGINAL LEVEL 29 ENTERTAINMENT GAME CONCEPT · BAYOU FISHING TYCOON</footer><div class="toast" id="toast" role="status"></div>
-<script>
-const fishTypes=[
-{name:"Bluegill",emoji:"🐟",value:12,weight:42,xp:5},{name:"Catfish",emoji:"🐈‍⬛",value:25,weight:28,xp:8},{name:"Bass",emoji:"🐠",value:38,weight:18,xp:12},{name:"Alligator Gar",emoji:"🐊",value:85,weight:9,xp:22},{name:"Golden Koi",emoji:"✨",value:180,weight:3,xp:40}
-];
-const upgrades=[
-{id:"rod",name:"Pro Fishing Rod",emoji:"🎣",desc:"Better gear means rarer fish and bigger catches.",base:100,max:10},
-{id:"boat",name:"Bayou Skiff",emoji:"🛶",desc:"Reach better water and improve your fishing pace.",base:180,max:8},
-{id:"net",name:"Lucky Fishing Net",emoji:"🕸️",desc:"Increase the value of every fish you sell.",base:250,max:10},
-{id:"crew",name:"Hire a Local Guide",emoji:"🧢",desc:"Your guide brings in fish while you manage the business.",base:350,max:10}
-];
-const spots=[
-{id:"cypress",city:"cypress",rarity:0,name:"Cypress Landing",emoji:"🌳",cost:0,desc:"Free public piers in Cypress City's Old Landing. A good place to supply your first delivery."},
-{id:"marsh",city:"cypress",rarity:1,name:"Whispering Marsh",emoji:"🌾",cost:700,desc:"Cypress backwaters. Improved odds of bass and gar."},
-{id:"riverfront",city:"belle",rarity:1,name:"Belle Rive Riverfront",emoji:"🌉",cost:0,desc:"Free fishing below the city bridges. Bass for the local bistros."},
-{id:"bayou",city:"belle",rarity:2,name:"Blackwater Bayou",emoji:"🐊",cost:2200,desc:"Deep channels beyond Belle Rive with improved trophy fish odds."},
-{id:"harbor",city:"gulf",rarity:1,name:"Soleil Harbor",emoji:"⚓",cost:0,desc:"Free coastal fishing alongside the port's working docks."},
-{id:"delta",city:"gulf",rarity:3,name:"Golden Delta",emoji:"🌅",cost:6500,desc:"Remote delta waters. The best odds of rare gar and golden koi."}
-];
-let state={cash:150,caught:0,xp:0,level:1,rod:1,boat:1,net:1,crew:0,spot:"cypress",unlocked:["cypress"],inventory:[],daily:false,city:"cypress",contract:null,deliveries:0,lastTick:Date.now()};
-try{const saved=JSON.parse(localStorage.getItem("bayouTycoonSave"));if(saved)state={...state,...saved}}catch(e){}
-// Migrate older saves by the fishing water, without resetting cash, gear or catches.
-if(!spots.some(s=>s.id===state.spot))state.spot="cypress";
-state.city=spots.find(s=>s.id===state.spot).city;
-let busy=false,activeTab="shop";
-const $=id=>document.getElementById(id);
-function save(){localStorage.setItem("bayouTycoonSave",JSON.stringify(state))}
-function money(n){return Math.floor(n).toLocaleString("en-US")}
-function toast(s){$("toast").textContent=s;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1900)}
-function log(s){$("log").innerHTML=`<div>• ${s}</div>`+$("log").innerHTML.split("</div>").slice(0,3).join("</div>")+"</div>"}
-function update(){
-$("cash").textContent=money(state.cash);$("caught").textContent=state.caught;$("level").textContent=state.level;
-$("rodStat").textContent=state.rod;$("boatStat").textContent=state.boat;$("valueStat").textContent=(1+(state.net-1)*.25).toFixed(2)+"×";$("incomeStat").textContent="$"+money(state.crew*18)+"/min";
-$("spotName").textContent=spots.find(s=>s.id===state.spot).name;
-updateRegion();save();render()
-}
-function addXP(n){state.xp+=n;let need=state.level*60;if(state.xp>=need){state.xp-=need;state.level++;toast("LEVEL UP! You're now level "+state.level);log("Reached level "+state.level+" — new opportunities await.")}}
-function weightedFish(){const rarity=spots.find(s=>s.id===state.spot).rarity;const weights=fishTypes.map((f,i)=>f.weight*(i>=2?1+rarity*.65+(state.rod-1)*.1:1));let r=Math.random()*weights.reduce((a,b)=>a+b,0);for(let i=0;i<fishTypes.length;i++){r-=weights[i];if(r<=0)return fishTypes[i]}return fishTypes[0]}
-function cast(){if(busy)return;busy=true;updateRegion();$("cast").disabled=true;$("status").textContent="Line in the water... wait for a bite";let p=0;$("bar").style.width="0%";let timer=setInterval(()=>{p+=4;$("bar").style.width=p+"%";if(p>=100){clearInterval(timer);let f=weightedFish();let size=(.75+Math.random()*.7);let worth=Math.round(f.value*size*(1+(state.net-1)*.25)*(1+(state.level-1)*.025));state.inventory.push({...f,worth});state.caught++;addXP(f.xp);$("status").textContent=`You caught a ${f.name}! Estimated value: $${worth}.`;log(`Caught ${f.emoji} ${f.name} worth $${worth}.`);busy=false;$("cast").disabled=false;$("cast").textContent="🎣 CAST AGAIN";update() }},Math.max(40,90-(state.boat-1)*6))}
-function sellAll(){if(!state.inventory.length){toast("Your bucket is empty!");return}let total=state.inventory.reduce((s,f)=>s+marketValue(f),0);state.cash+=total;let count=state.inventory.length;state.inventory=[];log(`Sold ${count} fish at the market for $${money(total)}.`);toast("Sale complete: +$"+money(total));update()}
-function price(u){return Math.round(u.base*Math.pow(1.62,state[u.id]))}
-function buyUpgrade(id){let u=upgrades.find(x=>x.id===id),cost=price(u);if(state[u.id]>=u.max||state.cash<cost)return;state.cash-=cost;state[u.id]++;log(`Upgraded ${u.name} to level ${state[u.id]}.`);toast(u.name+" upgraded!");update()}
-function unlock(id){const s=spots.find(x=>x.id===id);if(!s||busy||state.unlocked.includes(id)||state.cash<s.cost+fareTo(s.city))return;state.cash-=s.cost;state.unlocked.push(id);log("Unlocked "+s.name+". New fishing waters discovered!");travel(id)}
-function render(){
-const root=$("content");if(activeTab==="contracts"){root.innerHTML=renderContracts();return;}if(activeTab==="shop"){root.innerHTML=`<div class="grid">${upgrades.map(u=>{let cost=price(u),lvl=state[u.id];return `<article class="item"><div class="emoji">${u.emoji}</div><h3>${u.name} · Lv ${lvl}/${u.max}</h3><p>${u.desc}</p><button ${lvl>=u.max||state.cash<cost?"disabled":""} onclick="buyUpgrade('${u.id}')">${lvl>=u.max?"MAX LEVEL":"Upgrade · $"+money(cost)}</button></article>`}).join("")}</div>`}
-if(activeTab==="inventory"){root.innerHTML=`<div class="panel"><h2 style="margin-top:0">Fish market</h2><p class="muted">Sell your catch to fund the next upgrade. Better gear and locations improve your haul.</p><div class="fishrow"><b>Fish in bucket</b><b>${state.inventory.length}</b></div>${state.inventory.length?state.inventory.map(f=>`<div class="fishrow"><span>${f.emoji} ${f.name}</span><b>$${money(marketValue(f))}</b></div>`).join(""):'<p class="muted">No fish yet. Head out and cast a line!</p>'}<button class="bigButton" onclick="sellAll()">💵 SELL ALL · $${money(state.inventory.reduce((s,f)=>s+marketValue(f),0))}</button></div>`}
-if(activeTab==="business"){root.innerHTML=`<div class="grid"><article class="item"><div class="emoji">🧑‍🌾</div><h3>Fishing crew</h3><p>Each guide earns an estimated $18 per minute from passive catches.</p><button onclick="buyUpgrade('crew')" ${state.crew>=10||state.cash<price(upgrades[3])?"disabled":""}>Hire guide · $${money(price(upgrades[3]))}</button></article><article class="item"><div class="emoji">🏪</div><h3>Market stall</h3><p>Your fish are sold at the local market. Grow your operation by hiring more guides.</p><p><b>${state.crew}</b> guides employed</p></article><article class="item"><div class="emoji">🏆</div><h3>Tycoon rating</h3><p>Build your reputation by catching fish, upgrading equipment, and exploring.</p><b>Level ${state.level} angler</b></article></div>`}
-if(activeTab==="map"){root.innerHTML=`<div class="grid">${spots.map(s=>{let has=s.cost===0||state.unlocked.includes(s.id),fare=fareTo(s.city);return `<article class="item"><div class="emoji">${s.emoji}</div><h3>${s.name}</h3><p>${s.desc} Passage: $${fare}.</p><button ${busy||state.cash<(has?0:s.cost)+fare?"disabled":""} onclick="${has?`travel('${s.id}')`:`unlock('${s.id}')`}">${has?(state.spot===s.id?"CURRENT SPOT":"Travel here"):"Unlock + passage · $"+money(s.cost+fare)}</button></article>`}).join("")}</div>`}
-}
-function travel(id){const spot=spots.find(s=>s.id===id);if(!spot||busy||(!state.unlocked.includes(id)&&spot.cost!==0)||state.cash<fareTo(spot.city))return;if(spot.city!==state.city)sailTo(spot.city);state.spot=id;toast("Now fishing at "+spot.name);update()}
-document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeTab=b.dataset.tab;render()}));
-$("cast").addEventListener("click",cast);$("sellAll").addEventListener("click",sellAll);$("daily").addEventListener("click",()=>{if(state.daily){toast("Daily bonus already collected!");return}state.cash+=100;state.daily=true;toast("Daily bonus collected: +$100");log("Collected the daily $100 welcome bonus.");update()});
-window.buyUpgrade=buyUpgrade;window.unlock=unlock;window.travel=travel;window.sellAll=sellAll;
-setInterval(()=>{let now=Date.now(),mins=Math.min((now-state.lastTick)/60000,10);if(mins>0){state.lastTick=now;if(state.crew){state.cash+=state.crew*18*mins;update()}}},5000);
-</script>
-<script src="region.js"></script>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#172e2a" />
+    <meta
+      name="description"
+      content="Take the skiff out. Explore a living Louisiana-inspired bayou, discover 18 fish species and build your fishing operation."
+    />
+    <title>Bayou Fishing Tycoon — The Living Bayou</title>
+    <link rel="stylesheet" href="region.css" />
+    <link rel="stylesheet" href="game.css" />
+    <script defer src="game-core.js"></script>
+    <script defer src="world.js"></script>
+    <script defer src="game.js"></script>
+    <script defer src="region.js"></script>
+  </head>
+  <body>
+    <main id="game">
+      <canvas
+        id="world"
+        aria-label="Animated bayou environment. Use WASD, arrow keys, or the on-screen steering buttons to explore. Click the water to choose a casting spot."
+      ></canvas>
+      <div class="vignette" aria-hidden="true"></div>
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Bayou Fishing Tycoon home"
+          ><span class="brand-mark">B<span>FT</span></span
+          ><span
+            >BAYOU<span class="brand-sub">FISHING TYCOON / LEVEL 29</span></span
+          ></a
+        >
+        <div class="wallet">
+          <span class="live-dot"></span
+          ><span id="saveStatus">Progress saved locally</span
+          ><span class="divider"></span
+          ><span class="cash">$<b id="cash">150</b></span
+          ><span class="level">LV <b id="level">1</b></span>
+        </div>
+      </header>
+      <section class="location">
+        <div class="eyebrow">LOUISIANA-INSPIRED · FREE ROAM</div>
+        <h1 id="locationName">Cypress Landing</h1>
+        <p id="conditions">Morning on the water</p>
+        <div class="location-tags">
+          <span id="clock">07:30</span><span id="weather">Clear</span
+          ><span id="speciesCount">0 / 18 species</span>
+        </div>
+      </section>
+      <div class="world-note">
+        <span class="live-dot"></span> THE LIVING BAYOU
+        <span class="note-line"></span> EXPLORE AT YOUR OWN PACE
+      </div>
+      <div class="compass" aria-label="Boat coordinates">
+        <span>N</span>
+        <div class="compass-line">W ─── ◆ ─── E</div>
+        <small id="coordinates">40 m upstream</small>
+      </div>
+      <div class="navigation">
+        <button id="openMap" title="Open region map">
+          ⌖ <span>Region map</span></button
+        ><button
+          id="sound"
+          aria-pressed="false"
+          title="Toggle synthesized water ambience"
+        >
+          ♫ <span>Sound off</span></button
+        ><button id="help" title="Show game controls">
+          ? <span>Field guide</span>
+        </button>
+      </div>
+      <section class="fishing-hud" aria-label="Fishing controls">
+        <div class="status-top">
+          <span class="eyebrow" id="fishingMode"
+            >YOUR NEXT STORY IS OUT THERE</span
+          ><span id="baitLabel">Worm · unlimited</span>
+        </div>
+        <p id="status" role="status" aria-live="polite">
+          Find a quiet pocket of water. Cast a line.
+        </p>
+        <div id="fight" hidden>
+          <div class="fight-label">
+            <span>Reel while the marker is in green</span
+            ><b id="fightCount">0 / 3</b>
+          </div>
+          <div class="reel-track">
+            <span class="safe-zone"></span><i id="reelMarker"></i>
+          </div>
+          <div class="tension-label">
+            LINE TENSION <span id="tensionText">25%</span>
+          </div>
+          <div class="tension-track"><i id="tensionBar"></i></div>
+        </div>
+        <div class="action-row">
+          <button class="cast-button" id="cast">
+            Cast your line <span>↗</span></button
+          ><button
+            class="bait-button"
+            id="openBait"
+            aria-label="Change or buy bait"
+          >
+            Bait<br /><b id="baitShort">WORM</b>
+          </button>
+        </div>
+        <p class="control-hint" id="controlHint">
+          WASD / arrows to steer · click water to aim · Space to cast
+        </p>
+      </section>
+      <div class="steering" aria-label="Boat steering">
+        <button data-move="forward" aria-label="Move boat forward">↑</button>
+        <div>
+          <button data-move="left" aria-label="Steer boat left">←</button
+          ><button data-move="back" aria-label="Move boat backward">↓</button
+          ><button data-move="right" aria-label="Steer boat right">→</button>
+        </div>
+      </div>
+      <div class="catch-card" id="catchCard" hidden>
+        <span class="eyebrow" id="catchRarity">NEW DISCOVERY</span
+        ><strong id="catchName"></strong><span id="catchDetails"></span>
+      </div>
+      <nav class="dockbar" aria-label="Game menu">
+        <button data-panel="inventory">
+          <span class="nav-icon">♧</span> Livewell
+          <b id="bucketCount">0</b></button
+        ><button data-panel="journal">
+          <span class="nav-icon">▤</span> Fish journal</button
+        ><button data-panel="shop">
+          <span class="nav-icon">⚒</span> Outfitter</button
+        ><button data-panel="contracts">
+          <span class="nav-icon">◇</span> Contracts
+          <i id="contractDot" hidden></i></button
+        ><button data-panel="map">
+          <span class="nav-icon">⌖</span> Travel
+        </button>
+      </nav>
+      <div class="bottom-caption">
+        <span id="journalLine">A new chapter on familiar waters.</span
+        ><span>18 SPECIES · 4 REGIONS · ONE BAYOU</span>
+      </div>
+      <dialog id="panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">CYPRESS LANDING TRADING CO.</div>
+            <h2 id="panelTitle">Livewell</h2>
+          </div>
+          <button id="closePanel" aria-label="Close menu">✕</button>
+        </div>
+        <div id="panelContent"></div>
+      </dialog>
+      <dialog id="cityPanel" style="width: min(1100px, calc(100% - 24px))">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">REGIONAL CHART · 24 × 18 KM</div>
+            <h2>Three cities. One bayou.</h2>
+          </div>
+          <button id="closeCities" aria-label="Close city chart">✕</button>
+        </div>
+        <div class="region-layout">
+          <div class="chart-wrap">
+            <canvas
+              id="regionMap"
+              tabindex="0"
+              aria-label="Regional city map. Drag or use arrow keys to pan. Plus and minus zoom; zero resets. Choose a port using the adjacent selector."
+              >Use the port selector to explore Cypress City, Belle Rive and
+              Port Soleil.</canvas
+            >
+            <div class="chart-toolbar">
+              <button id="zoomIn" aria-label="Zoom in">+</button
+              ><button id="zoomOut" aria-label="Zoom out">−</button
+              ><button id="resetMap">Region view</button>
+            </div>
+            <div class="chart-help">
+              Drag to explore · Tap a city to inspect · + / − to zoom · Gold =
+              ports, lime = your boat
+            </div>
+          </div>
+          <aside class="port-panel">
+            <label class="sub" for="citySelect">EXPLORE A CITY</label
+            ><select id="citySelect">
+              <option value="cypress">Cypress City</option>
+              <option value="belle">Belle Rive</option>
+              <option value="gulf">Port Soleil</option>
+            </select>
+            <h2 id="portName"></h2>
+            <p class="muted" id="portDescription"></p>
+            <div class="port-facts">
+              <div>City footprint<b id="cityArea"></b></div>
+              <div>Market price<b id="marketRate"></b></div>
+              <div>Direct distance<b id="routeDistance"></b></div>
+              <div>Passage fare<b id="passageFare"></b></div>
+            </div>
+            <div id="districtList" class="city-districts"></div>
+            <button class="bigButton" id="sail">Sail to port</button>
+            <p class="muted">
+              Passage is instant and costs $4/km, rounded up. Each port has free
+              public fishing. Zoom in to see 220 m street blocks, buildings,
+              parks and docks.
+            </p>
+          </aside>
+        </div>
+        <div class="port-location" aria-live="polite">
+          <b id="dockedAt"></b><span id="localMarket"></span>
+        </div>
+      </dialog>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    </main>
+  </body>
+</html>
