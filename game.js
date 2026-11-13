@@ -185,7 +185,7 @@ function finish() {
   world.biting = false;
   $("fight").hidden = true;
   $("cast").disabled = false;
-  $("cast").innerHTML = "Cast again <span>↗</span>";
+  $("cast").innerHTML = "Cast again <span>→</span>";
   $("fishingMode").textContent = "YOUR NEXT STORY IS OUT THERE";
   save();
 }
@@ -430,6 +430,10 @@ function frame(ms) {
       fightTime += dt;
       marker = 0.5 + Math.sin(fightTime * 2.1) * 0.49;
       $("reelMarker").style.left = marker * 100 + "%";
+      $("cast").innerHTML =
+        marker >= 0.17 && marker <= 0.83
+          ? "Reel now <span>→</span>"
+          : "Wait for green <span>…</span>";
     }
   }
   world.draw();
