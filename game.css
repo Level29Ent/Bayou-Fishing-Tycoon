@@ -1,0 +1,946 @@
+:root {
+  color-scheme: dark;
+  --cream: #f3f0df;
+  --muted: #b7c5b9;
+  --gold: #edc975;
+  --green: #b7d09a;
+  --panel: #142b27;
+  --line: #ffffff21;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #1e3934;
+  color: var(--cream);
+  font:
+    14px/1.5 system-ui,
+    -apple-system,
+    Segoe UI,
+    sans-serif;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+button {
+  border: 1px solid var(--line);
+  background: #142b27bf;
+  border-radius: 7px;
+}
+button:hover:not(:disabled) {
+  border-color: var(--gold);
+  background: #2c463a;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+#game {
+  position: relative;
+  height: 100svh;
+  min-height: 690px;
+  overflow: hidden;
+}
+#world,
+.vignette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.vignette {
+  pointer-events: none;
+  background:
+    linear-gradient(#081a2466, transparent 34%, transparent 55%, #071d29d9),
+    linear-gradient(90deg, #0d242c55, transparent 50%);
+}
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 96px;
+  padding: 24px 3.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff17;
+  background: linear-gradient(#142b326b, transparent);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  font-size: 24px;
+}
+.brand-mark {
+  width: 44px;
+  height: 45px;
+  border: 1px solid #e9ce8e96;
+  border-radius: 50% 50% 7px 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-size: 25px;
+  color: var(--gold);
+}
+.brand-mark span {
+  font: 8px system-ui;
+  letter-spacing: 0.25em;
+  padding-top: 3px;
+}
+.brand-sub {
+  display: block;
+  font: 8px/2.5 system-ui;
+  letter-spacing: 0.21em;
+  color: #d7e1d5;
+}
+.wallet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  color: #ccd6c9;
+}
+.live-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 10px #b7d09a66;
+}
+.divider {
+  height: 25px;
+  border-left: 1px solid var(--line);
+  margin: 0 12px;
+}
+.cash {
+  font-size: 23px;
+  color: var(--cream);
+  letter-spacing: 0.03em;
+}
+.cash b {
+  font-weight: 500;
+}
+.level {
+  font-size: 10px;
+  border: 1px solid #d7cf9c77;
+  padding: 6px 9px;
+  margin-left: 9px;
+  color: var(--gold);
+}
+.location {
+  position: absolute;
+  top: 125px;
+  left: 3.5vw;
+  text-shadow: 0 2px 18px #102729aa;
+  pointer-events: none;
+}
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.23em;
+  font-weight: 650;
+  color: var(--gold);
+}
+h1 {
+  font:
+    normal clamp(30px, 3.6vw, 52px) / 1.12 Georgia,
+    serif;
+  margin: 11px 0 10px;
+  letter-spacing: -0.02em;
+}
+.location p {
+  font-size: 12px;
+  color: #e0e8db;
+  margin: 0 0 16px;
+}
+.location-tags {
+  display: flex;
+  gap: 7px;
+}
+.location-tags span {
+  border: 1px solid #ffffff36;
+  background: #12302d6b;
+  border-radius: 4px;
+  padding: 4px 9px;
+  font-size: 10px;
+}
+.world-note {
+  position: absolute;
+  top: 122px;
+  right: 3.5vw;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #d6dfd1;
+}
+.note-line {
+  height: 1px;
+  width: 18px;
+  background: #d6dfd177;
+}
+.compass {
+  position: absolute;
+  right: 3.5vw;
+  top: 180px;
+  text-align: center;
+  color: #edeed6;
+  font-size: 11px;
+}
+.compass > span {
+  color: var(--gold);
+  font:
+    19px Georgia,
+    serif;
+}
+.compass-line {
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  margin: 5px 0;
+}
+.compass small {
+  font-size: 9px;
+  opacity: 0.7;
+}
+.navigation {
+  position: absolute;
+  left: 3.5vw;
+  top: 330px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.navigation button {
+  width: 38px;
+  height: 38px;
+  font-size: 19px;
+  background: #112d2d8c;
+  position: relative;
+}
+.navigation button span {
+  position: absolute;
+  left: 47px;
+  top: 8px;
+  white-space: nowrap;
+  font-size: 10px;
+  text-shadow: 0 1px 5px #10251c;
+}
+.fishing-hud {
+  position: absolute;
+  width: 440px;
+  max-width: calc(100% - 32px);
+  bottom: 126px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(140deg, #19362fef, #102c2be6);
+  border: 1px solid #ced4af3b;
+  box-shadow: 0 15px 55px #051c254a;
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 18px 22px 11px;
+}
+.status-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.status-top .eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.16em;
+}
+#baitLabel {
+  font-size: 9px;
+  color: var(--muted);
+}
+#status {
+  font-size: 13px;
+  margin: 11px 0 14px;
+  min-height: 20px;
+}
+.action-row {
+  display: flex;
+  gap: 8px;
+}
+.cast-button {
+  background: var(--gold);
+  color: #24372b;
+  border: 0;
+  flex: 1;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  font-weight: 700;
+  padding: 14px 17px;
+  text-align: left;
+}
+.cast-button span {
+  float: right;
+  font-size: 18px;
+  line-height: 1;
+}
+.cast-button:hover:not(:disabled) {
+  background: #ffe0a0;
+  color: #142e22;
+}
+.bait-button {
+  min-width: 64px;
+  background: #244237;
+  font-size: 9px;
+  line-height: 1.6;
+  color: #c4d0bd;
+}
+.bait-button b {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+.control-hint {
+  text-align: center;
+  color: #a1b6a5;
+  font-size: 8px;
+  margin: 11px 0 0;
+  letter-spacing: 0.03em;
+}
+.steering {
+  position: absolute;
+  left: 3.5vw;
+  bottom: 149px;
+  text-align: center;
+  user-select: none;
+  touch-action: none;
+}
+.steering button {
+  width: 38px;
+  height: 33px;
+  margin: 2px;
+  background: #15322ea6;
+  color: #d1d8be;
+  font-size: 16px;
+}
+.steering div {
+  display: flex;
+}
+.dockbar {
+  position: absolute;
+  bottom: 49px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  border: 1px solid #cbd7bc28;
+  background: #102b2be6;
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
+  padding: 7px;
+}
+.dockbar button {
+  border: 0;
+  background: transparent;
+  white-space: nowrap;
+  padding: 10px 15px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dockbar button:hover {
+  background: #334c3b;
+}
+.nav-icon {
+  font-size: 18px;
+  color: var(--gold);
+}
+.dockbar b {
+  font-size: 9px;
+  background: #d5c58c24;
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: var(--gold);
+}
+.dockbar i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.bottom-caption {
+  position: absolute;
+  bottom: 16px;
+  left: 3.5vw;
+  right: 3.5vw;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 8px;
+  color: #a5bdb3;
+  letter-spacing: 0.1em;
+}
+.bottom-caption > span:last-child {
+  letter-spacing: 0.18em;
+}
+.catch-card {
+  position: absolute;
+  right: 3.5vw;
+  bottom: 200px;
+  background: #162f2def;
+  box-shadow: 0 10px 40px #001b2244;
+  border: 1px solid #e8d39666;
+  padding: 20px 25px;
+  border-radius: 8px;
+  min-width: 210px;
+}
+.catch-card strong {
+  display: block;
+  font:
+    26px Georgia,
+    serif;
+  margin: 6px 0;
+}
+.catch-card > span:last-child {
+  font-size: 11px;
+  color: var(--muted);
+}
+[hidden] {
+  display: none !important;
+}
+.fight-label,
+.tension-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.reel-track {
+  height: 18px;
+  position: relative;
+  border: 1px solid #ffffff20;
+  border-radius: 4px;
+  background: #d3996233;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.safe-zone {
+  position: absolute;
+  inset: 0 17%;
+  background: #9cce8266;
+}
+#reelMarker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  left: 50%;
+  background: #fff5ce;
+  box-shadow: 0 0 8px #fff;
+}
+.tension-label {
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+.tension-track {
+  height: 3px;
+  background: #ffffff12;
+  margin-bottom: 13px;
+}
+.tension-track i {
+  display: block;
+  height: 100%;
+  background: #dba77f;
+  width: 25%;
+}
+dialog {
+  color: var(--cream);
+  background: linear-gradient(135deg, #203b32, #102b2b);
+  border: 1px solid #c5d3b13d;
+  border-radius: 16px;
+  padding: 26px;
+  width: min(790px, calc(100% - 28px));
+  max-height: 84svh;
+  box-shadow: 0 30px 100px #001416b3;
+}
+dialog::backdrop {
+  background: #001b228c;
+  backdrop-filter: blur(7px);
+}
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 15px;
+  margin-bottom: 18px;
+}
+.panel-header h2 {
+  font:
+    30px Georgia,
+    serif;
+  margin: 7px 0 0;
+}
+.panel-header button {
+  height: 34px;
+  width: 34px;
+  background: transparent;
+  font-size: 18px;
+}
+.intro {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.card {
+  border: 1px solid var(--line);
+  background: #ffffff04;
+  padding: 17px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.card h3 {
+  font:
+    20px Georgia,
+    serif;
+  margin: 6px 0;
+}
+.card p {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 8px 0 15px;
+}
+.card button,
+.panel-action {
+  padding: 9px 14px;
+  font-size: 11px;
+  background: #d4c68d1c;
+  color: var(--gold);
+}
+.card .rarity {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+}
+.card small {
+  color: var(--muted);
+  font-size: 10px;
+}
+.card .fish-silhouette {
+  width: 60px;
+  height: 22px;
+  position: relative;
+  background: var(--fish, #9fae8e);
+  border-radius: 60% 40% 40% 60%;
+  margin: 10px 0 15px;
+  opacity: 0.85;
+}
+.fish-silhouette:before {
+  content: "";
+  position: absolute;
+  right: -12px;
+  top: 1px;
+  border-right: 14px solid var(--fish, #9fae8e);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+.fish-silhouette:after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  width: 4px;
+  height: 4px;
+  background: #142a28;
+  border-radius: 50%;
+}
+.undiscovered {
+  opacity: 0.5;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.row small {
+  color: var(--muted);
+}
+.panel-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+.primary {
+  background: var(--gold) !important;
+  color: #1e3328 !important;
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 5px;
+}
+.quest-progress {
+  height: 4px;
+  background: #ffffff12;
+  margin: 10px 0;
+}
+.quest-progress i {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+}
+.toast {
+  position: fixed;
+  top: 105px;
+  left: 50%;
+  transform: translate(-50%, -10px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: #eddaa7;
+  color: #233829;
+  border-radius: 7px;
+  padding: 11px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  max-width: 90%;
+  transition: 0.2s;
+}
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.help-list {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 2;
+}
+.help-list strong {
+  color: var(--cream);
+}
+@media (min-width: 1500px) {
+  .fishing-hud {
+    bottom: 145px;
+  }
+  .dockbar {
+    bottom: 58px;
+  }
+  .location {
+    top: 150px;
+  }
+}
+@media (max-width: 900px) {
+  .wallet #saveStatus,
+  .wallet > .live-dot,
+  .divider {
+    display: none;
+  }
+  .catch-card {
+    bottom: 345px;
+    right: 4vw;
+    padding: 14px 18px;
+  }
+  .catch-card strong {
+    font-size: 22px;
+  }
+  .world-note {
+    display: none;
+  }
+  .bottom-caption > span:last-child {
+    display: none;
+  }
+  .steering {
+    bottom: 319px;
+  }
+  .compass {
+    top: 150px;
+  }
+  .dockbar button {
+    padding: 10px;
+  }
+  .location {
+    max-width: 65%;
+  }
+  h1 {
+    font-size: 34px;
+  }
+  .navigation {
+    top: 290px;
+  }
+}
+@media (max-width: 600px) {
+  #game {
+    min-height: 660px;
+  }
+  .topbar {
+    height: 76px;
+    padding: 16px;
+  }
+  .brand {
+    font-size: 19px;
+    gap: 8px;
+  }
+  .brand-sub {
+    font-size: 6px;
+    letter-spacing: 0.14em;
+  }
+  .brand-mark {
+    width: 34px;
+    height: 37px;
+    font-size: 21px;
+  }
+  .wallet {
+    gap: 7px;
+  }
+  .cash {
+    font-size: 20px;
+  }
+  .level {
+    margin: 0;
+    font-size: 8px;
+    padding: 5px;
+  }
+  .location {
+    top: 100px;
+    left: 18px;
+    max-width: 74%;
+  }
+  .eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.17em;
+  }
+  h1 {
+    font-size: 30px;
+  }
+  .location p {
+    font-size: 10px;
+    max-width: 260px;
+  }
+  .location-tags span {
+    font-size: 8px;
+    padding: 3px 6px;
+  }
+  .compass {
+    top: 111px;
+    right: 16px;
+  }
+  .compass-line {
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+  .compass small {
+    font-size: 7px;
+  }
+  .navigation {
+    left: 18px;
+    top: 257px;
+    gap: 6px;
+  }
+  .navigation button {
+    height: 32px;
+    width: 32px;
+    font-size: 16px;
+  }
+  .navigation button span {
+    display: none;
+  }
+  .fishing-hud {
+    bottom: 119px;
+    padding: 15px 16px 11px;
+  }
+  .status-top .eyebrow {
+    font-size: 7px;
+  }
+  .status-top #baitLabel {
+    font-size: 8px;
+  }
+  #status {
+    font-size: 12px;
+    margin: 9px 0 12px;
+  }
+  .dockbar {
+    bottom: 42px;
+    gap: 0;
+    max-width: calc(100% - 24px);
+    width: calc(100% - 24px);
+    padding: 5px;
+  }
+  .dockbar button {
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 8px;
+    padding: 6px 3px;
+    position: relative;
+  }
+  .dockbar b {
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    padding: 0 4px;
+    font-size: 8px;
+  }
+  .dockbar i {
+    position: absolute;
+    right: 14px;
+    top: 3px;
+  }
+  .nav-icon {
+    font-size: 19px;
+  }
+  .bottom-caption {
+    bottom: 14px;
+    font-size: 7px;
+    letter-spacing: 0;
+    left: 18px;
+  }
+  .steering {
+    bottom: 310px;
+    left: 16px;
+  }
+  .steering button {
+    width: 33px;
+    height: 30px;
+  }
+  .catch-card {
+    bottom: 310px;
+    right: 16px;
+    min-width: 160px;
+    max-width: 210px;
+    padding: 12px;
+  }
+  .catch-card strong {
+    font-size: 20px;
+  }
+  .catch-card .eyebrow {
+    font-size: 7px;
+  }
+  .grid {
+    gap: 9px;
+  }
+  .card {
+    padding: 12px;
+  }
+  .card h3 {
+    font-size: 18px;
+  }
+  .card p {
+    font-size: 10px;
+  }
+  .card button {
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+  dialog {
+    padding: 19px;
+    max-height: 88svh;
+  }
+  .panel-header h2 {
+    font-size: 27px;
+  }
+  .toast {
+    top: 82px;
+    font-size: 11px;
+    width: max-content;
+    text-align: center;
+  }
+  .help-list {
+    font-size: 12px;
+  }
+  .control-hint {
+    font-size: 7px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition: none;
+  }
+}
+
+/* Retain the regional chart and repeatable deliveries from the city expansion. */
+#panel .item {
+  border: 1px solid var(--line);
+  padding: 16px;
+  border-radius: 8px;
+  background: #ffffff04;
+}
+#panel .item h3 {
+  font:
+    20px Georgia,
+    serif;
+  margin: 5px 0;
+}
+#panel .item p,
+.muted {
+  font-size: 11px;
+  color: var(--muted);
+}
+#panel .item button,
+.smallBtn {
+  padding: 9px 12px;
+  font-size: 11px;
+  color: var(--gold);
+}
+#panel .emoji {
+  display: none;
+}
+.contract-summary {
+  margin-top: 18px;
+}
+.bigButton {
+  padding: 12px 16px;
+  font-weight: 700;
+  background: var(--gold);
+  color: #203b2b;
+  border: 0;
+  width: 100%;
+}
+.port-panel .sub {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+}
+@media (max-width: 600px) {
+  #cityPanel .chart-wrap canvas {
+    height: 270px;
+  }
+  #cityPanel .port-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  #cityPanel .panel-header h2 {
+    font-size: 23px;
+  }
+}
